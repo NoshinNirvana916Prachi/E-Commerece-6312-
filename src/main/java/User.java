@@ -13,12 +13,10 @@ public class User {
     }
 
     public boolean verifyUser() {
-        // Sample implementation, actual implementation would involve checking credentials
         return this.username != null && this.password != null;
     }
 
     public boolean login(String username, String password) {
-        // Sample implementation, actual implementation would check credentials against stored data
         return this.username.equals(username) && this.password.equals(password);
     }
 
