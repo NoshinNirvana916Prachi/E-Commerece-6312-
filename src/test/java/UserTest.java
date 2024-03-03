@@ -11,6 +11,4 @@ public class UserTest {
         assertEquals("password", user.getPassword());
         assertEquals("email", user.getEmail());
     }
-
-    // Add more test cases for User class as needed
 }
