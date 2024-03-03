@@ -12,5 +12,4 @@ public class ProductTest {
         assertEquals("Description", product.getDescription());
     }
 
-    // Add more test cases for Product class as needed
 }
