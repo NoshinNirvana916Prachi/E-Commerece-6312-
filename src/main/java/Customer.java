@@ -44,7 +44,6 @@ public class Customer extends User {
     // Method to place an order
     public Order placeOrder() {
         // Logic to create and add an order to the customer's list of orders.
-        // This is a placeholder. In a real system, additional details like payment processing would be needed.
         Order newOrder = new Order(address, getUserId(), address, null, null, address, getUserId());
         orders.add(newOrder);
         return newOrder;
@@ -79,5 +78,4 @@ public class Customer extends User {
         return wishlist;
     }
 
-    // Other getters and setters are omitted for brevity.
 }
