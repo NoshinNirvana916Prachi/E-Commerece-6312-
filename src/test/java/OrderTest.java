@@ -16,6 +16,4 @@ public class OrderTest {
         assertEquals("Pending", order.getStatus());
         assertEquals(20.0f, order.getTotalPrice(), 0.001);
     }
-
-    // Add more test cases for Order class as needed
 }
