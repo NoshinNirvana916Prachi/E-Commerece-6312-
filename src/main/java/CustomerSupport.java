@@ -11,14 +11,25 @@ public class CustomerSupport extends User {
         this.assignedTickets = new ArrayList<>();
     }
 
+    // Method to assign a ticket to the support representative
     public void assignTicket(Ticket ticket) {
         this.assignedTickets.add(ticket);
-        // Additional logic to assign a ticket to the support representative.
+        System.out.println("Ticket " + ticket.getTicketId() + " assigned to " + getUsername());
     }
 
+    // Method to resolve a ticket and remove it from the assigned tickets list
     public boolean resolveTicket(String ticketId) {
-        // Additional logic to resolve a ticket and remove it from the assigned tickets list.
-        return assignedTickets.removeIf(ticket -> ticket.getTicketId().equals(ticketId));
+        boolean removed = false;
+        for (Ticket ticket : assignedTickets) {
+            if (ticket.getTicketId().equals(ticketId)) {
+                assignedTickets.remove(ticket);
+                ticket.setResolved(true);
+                removed = true;
+                System.out.println("Ticket " + ticketId + " resolved by " + getUsername());
+                break;
+            }
+        }
+        return removed;
     }
 
     // Getters and Setters
@@ -27,4 +38,11 @@ public class CustomerSupport extends User {
 
     public List<Ticket> getAssignedTickets() { return assignedTickets; }
     public void setAssignedTickets(List<Ticket> assignedTickets) { this.assignedTickets = assignedTickets; }
+
+  
+
+    // Constraint 7: ResolvedByCustomerSupport
+    public boolean isResolvedByCustomerSupport(Ticket ticket) {
+        return assignedTickets.stream().anyMatch(t -> t.equals(ticket));
+    }
 }
