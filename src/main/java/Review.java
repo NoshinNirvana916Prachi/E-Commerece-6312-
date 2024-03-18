@@ -69,4 +69,13 @@ public class Review {
     public void setProductId(String productId) {
         this.productId = productId;
     }
+    // Constraint 2: ReviewByPurchasingCustomer
+    public boolean isValidReviewByPurchasingCustomer(Customer customer, List<Order> orders) {
+        for (Order order : orders) {
+            if (order.getCustomer().equals(customer) && order.getProductIds().contains(productId)) {
+                return true;
+            }
+        }
+        return false;
+    }
 }
