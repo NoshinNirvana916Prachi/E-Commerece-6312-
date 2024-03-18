@@ -78,4 +78,15 @@ public class Review {
         }
         return false;
     }
+     // Constraint 3: SingleProductReview
+    public static boolean isSingleProductReview(List<Rating> ratings) {
+        return ratings.stream().map(Rating::getProductId).distinct().count() == 1;
+    }
+
+    // Constraint 5: CannotDeleteIfOnlyReview
+    public static boolean canDeleteReview(List<Rating> allRatings, Rating reviewToDelete) {
+        String productIdToDelete = reviewToDelete.getProductId();
+        long countReviewsForProduct = allRatings.stream().filter(r -> r.getProductId().equals(productIdToDelete)).count();
+        return countReviewsForProduct > 1;
+    }
 }
