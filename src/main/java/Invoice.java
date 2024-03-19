@@ -12,7 +12,7 @@ public class Invoice {
     // Constructor
     public Invoice(int invoiceNumber) {
         this.invoiceNumber = invoiceNumber;
-        this.date = new Date(); // The invoice date is set to the current date/time.
+        this.date = new Date(); 
         this.items = new ArrayList<>();
         this.totalAmount = 0.0;
         this.paid = false;
@@ -79,7 +79,6 @@ public class Invoice {
         return totalAmount;
     }
 
-    // No setter for totalAmount since it's calculated from the items
 
     public boolean isPaid() {
         return paid;

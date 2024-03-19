@@ -4,9 +4,9 @@ public class Electronics extends Product {
     private String category;
 
     // Constructor
-    public Electronics(String productId, String productName, float cost, String description,
+    public Electronics(String productId, String productName, float cost, String description,int stock,
                        String brand, String model, String category) {
-        super(productId, productName, cost, description);
+        super(productId, productName, cost, description, stock);
         this.brand = brand;
         this.model = model;
         this.category = category;

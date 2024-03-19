@@ -6,9 +6,9 @@ public class Clothing extends Product {
     private String material;
 
     // Constructor
-    public Clothing(String productId, String productName, float cost, String description, 
+    public Clothing(String productId, String productName, float cost, String description,int stock, 
                     String brand, String size, String gender, String color, String material) {
-        super(productId, productName, cost, description);
+        super(productId, productName, cost, description, stock);
         this.brand = brand;
         this.size = size;
         this.gender = gender;

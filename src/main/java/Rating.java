@@ -40,4 +40,5 @@ public class Rating {
     public void setProductId(String productId) {
         this.productId = productId;
     }
+}
 

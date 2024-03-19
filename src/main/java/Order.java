@@ -8,6 +8,7 @@ public class Order {
     private Date deliveryDate;
     private String status;
     private float totalPrice;
+	private ShoppingCart shoppingCart;
 
     // Constructor
     public Order(String orderId, int userId, String productId, Date orderDate, 
@@ -23,15 +24,18 @@ public class Order {
 
     // Method to place an order
     public void placeOrder() {
-        // Logic to place an order
-        // In a real scenario, this would involve more details such as inventory check, payment processing, etc.
         this.status = "Placed";
-        this.orderDate = new Date(); // Assuming the order date is the current date/time
+        this.orderDate = new Date(); 
     }
 
     // Method to calculate the total price of the order
+    //Constraint 36: TotalPriceCalculation
     public void calculateTotalPrice(float price, int quantity) {
-        // Assuming that the total price is a product of the price per item and quantity
+        
+    	 float totalPrice = 0;
+    	    for (CartItem item : this.shoppingCart.getItems()) { 
+    	        totalPrice += item.getProduct().getPrice() * item.getQuantity();
+    	    }
         this.totalPrice = price * quantity;
     }
 
@@ -91,5 +95,6 @@ public class Order {
     public void setTotalPrice(float totalPrice) {
         this.totalPrice = totalPrice;
     }
+
 }
 

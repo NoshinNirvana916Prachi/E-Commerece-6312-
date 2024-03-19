@@ -11,13 +11,18 @@ public class CustomerSupport extends User {
         this.assignedTickets = new ArrayList<>();
     }
 
-    // Method to assign a ticket to the support representative
+    //Constraint 24: CanAssistUnresolvedTicket
     public void assignTicket(Ticket ticket) {
-        this.assignedTickets.add(ticket);
-        System.out.println("Ticket " + ticket.getTicketId() + " assigned to " + getUsername());
+        
+        if (!ticket.isResolved()) {
+            this.assignedTickets.add(ticket);
+            System.out.println("Ticket " + ticket.getTicketId() + " assigned to " + getUsername());
+        } else {
+            System.out.println("Ticket " + ticket.getTicketId() + " is already resolved and cannot be assigned.");
+        }
     }
 
-    // Method to resolve a ticket and remove it from the assigned tickets list
+    //Constraint 22:TicketResolvedByCustomerSupport
     public boolean resolveTicket(String ticketId) {
         boolean removed = false;
         for (Ticket ticket : assignedTickets) {

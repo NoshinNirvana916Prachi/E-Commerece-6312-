@@ -1,3 +1,5 @@
+import java.util.List;
+
 public class Review {
     private String reviewId;
     private String title;
@@ -71,8 +73,9 @@ public class Review {
     }
     // Constraint 2: ReviewByPurchasingCustomer
     public boolean isValidReviewByPurchasingCustomer(Customer customer, List<Order> orders) {
+    	int customerId = customer.getUserId();
         for (Order order : orders) {
-            if (order.getCustomer().equals(customer) && order.getProductIds().contains(productId)) {
+            if (order.getUserId()==customerId && order.getProductId().contains(productId)) {
                 return true;
             }
         }

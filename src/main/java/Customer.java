@@ -14,36 +14,37 @@ public class Customer extends User {
         this.address = address;
         this.phone = phone;
         this.orders = new ArrayList<>();
-        // Assuming ShoppingCart and Wishlist are already defined and can be instantiated.
-        this.shoppingCart = new ShoppingCart();
+        this.shoppingCart = new ShoppingCart(null);
         this.wishlist = new Wishlist();
     }
 
     // Methods to interact with the shopping cart
     public void addToCart(Product product) {
-        // Assuming ShoppingCart has an addProduct method.
         this.shoppingCart.addItem(product, getUserId());
     }
 
     public void removeFromCart(Product product) {
-        // Assuming ShoppingCart has a removeProduct method.
         this.shoppingCart.removeItem(product);
     }
 
     // Methods to interact with the wishlist
     public void addToWishlist(Product product) {
-        // Assuming Wishlist has an addProduct method.
         this.wishlist.addItem(product);
     }
 
     public void removeFromWishlist(Product product) {
-        // Assuming Wishlist has a removeProduct method.
         this.wishlist.removeItem(product);
     }
 
     // Method to place an order
+    //Constraint 34:OrderQuantitiesDoNotExceedStock
     public Order placeOrder() {
         // Logic to create and add an order to the customer's list of orders.
+    	for (CartItem item : this.shoppingCart.getItems()) {
+            if (item.getQuantity() > item.getProduct().getStock()) {
+                throw new IllegalStateException("Cannot place order: Item quantity exceeds stock.");
+            }
+    	}
         Order newOrder = new Order(address, getUserId(), address, null, null, address, getUserId());
         orders.add(newOrder);
         return newOrder;
@@ -76,6 +77,11 @@ public class Customer extends User {
 
     public Wishlist getWishlist() {
         return wishlist;
+    }
+    
+    //Constraint 30:SingleCustomer
+    public ShoppingCart createCart() {
+        return new ShoppingCart(this); 
     }
 
 }

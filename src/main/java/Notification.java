@@ -16,8 +16,6 @@ public class Notification {
 
     // Method to generate a unique ID for the notification
     private static String generateUniqueId() {
-        // This is a placeholder for a unique ID generator logic
-        // In a real system, you may want to use a UUID or another method to ensure uniqueness
         return "NOTIF-" + System.currentTimeMillis();
     }
 

@@ -6,6 +6,8 @@ public class Payment {
     private double total;
     private boolean paid;
     private String details;
+    private String status;
+    private Invoice invoice;
 
     // Constructor
     public Payment(String id, String orderId, double total, boolean paid, String details) {
@@ -18,23 +20,21 @@ public class Payment {
 
     // Method to process the payment
     public boolean confirmTransaction() {
-        // Logic to confirm payment transaction
-        // This would be replaced with real payment processing logic
-        this.paid = true;
+    	this.paid = true;
+        this.status = "completed"; 
         return this.paid;
     }
 
     // Method to get the payment date
     public Date getPaymentDate() {
-        // Logic to return payment date
-        // This placeholder assumes payment date is current date
-        return new Date(); // This would typically be the date the payment was confirmed
+     
+      
+        return new Date(); 
     }
 
     // Method to make the transaction
     public boolean makeTransaction() {
-        // Logic to perform the payment transaction
-        // This would interact with a payment gateway or service
+    
         this.paid = true;
         return this.paid;
     }
@@ -43,8 +43,12 @@ public class Payment {
     public String getId() {
         return id;
     }
-
+    
+    // Constraint 19: NonEmptyPayemntID
     public void setId(String id) {
+    	 if (id == null || id.trim().isEmpty()) {
+    	        throw new IllegalArgumentException("ID cannot be empty.");
+    	    }
         this.id = id;
     }
 
@@ -69,14 +73,40 @@ public class Payment {
     }
 
     public void setPaid(boolean paid) {
+    	if (!paid && (details == null || details.trim().isEmpty())) {
+            throw new IllegalArgumentException("Details are required if the payment is not completed.");
+        }
         this.paid = paid;
+    }
+    
+    
+    //Constraint 18: PaidWhenCompleted
+    public void setStatus(String status) {
+        this.status = status;
+        if ("completed".equals(status)) {
+            this.paid = true;
+        }
     }
 
     public String getDetails() {
         return details;
     }
-
+    
+    //Constraint 20: DetailRequiredIfNotPaid
     public void setDetails(String details) {
+    	if (!this.paid && (details == null || details.trim().isEmpty())) {
+            throw new IllegalArgumentException("Details cannot be empty if the payment is not completed.");
+        }
         this.details = details;
+    }
+    
+    //Constraints 21: SingleInvoice
+    public void setInvoice(Invoice invoice) {
+        this.invoice = invoice;
+    }
+
+    // Getter for invoice
+    public Invoice getInvoice() {
+        return this.invoice;
     }
 }

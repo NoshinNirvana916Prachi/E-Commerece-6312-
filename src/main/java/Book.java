@@ -7,7 +7,7 @@ public class Book extends Product {
     // Constructor
     public Book(String productId, String productName, float cost, String description,
                 String isbn, String author, String genre, int pageCount) {
-        super(productId, productName, cost, description);
+        super(productId, productName, cost, description, pageCount);
         this.isbn = isbn;
         this.author = author;
         this.genre = genre;

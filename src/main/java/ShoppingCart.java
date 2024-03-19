@@ -5,14 +5,24 @@ import java.util.List;
 public class ShoppingCart {
     private List<CartItem> items;
     private Date creationDate;
+    private Customer owner;
 
-    public ShoppingCart() {
+    public ShoppingCart(Customer owner) {
         this.items = new ArrayList<>();
+        this.owner = owner;
         this.creationDate = new Date(); // Set the creation date to the current date
     }
-
+    
+    // Constraint 28: NoDuplicateProducts
     public void addItem(Product product, int quantity) {
-        this.items.add(new CartItem(product, quantity));
+    	
+    	for (CartItem item : items) {
+            if (item.getProduct().getProductId().equals(product.getProductId())) {
+                
+                return; 
+            }
+        }
+    	this.items.add(new CartItem(product, quantity));
     }
 
     public void removeItem(Product product) {
@@ -48,6 +58,16 @@ public class ShoppingCart {
     public void setCreationDate(Date creationDate) {
         this.creationDate = creationDate;
     }
-
+    
+    //Constraint 29: NonEmptyCart
+    public List<CartItem> checkout() {
+        if (items.isEmpty()) {
+            throw new IllegalStateException("Cannot checkout an empty shopping cart.");
+        }
+        return items;
+    }
+    public Customer getOwner() {
+        return owner;
+    }
 
 }

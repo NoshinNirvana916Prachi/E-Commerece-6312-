@@ -3,18 +3,20 @@ public class Product {
     private String productName;
     private float price;
     private String description;
+    private int stock;
 
     // Constructor
-    public Product(String productId, String productName, float price, String description) {
+    public Product(String productId, String productName, float price, String description,int stock) {
         this.productId = productId;
         this.productName = productName;
         this.price = price;
         this.description = description;
+        this.stock=stock;
     }
 
     // Method to add this product to a shopping cart
     public void addToCart(ShoppingCart cart) {
-        cart.addItem(this, 1); // Adds one quantity of this product to the cart
+        cart.addItem(this, 1); 
     }
 
     // Method to retrieve the product's details
@@ -55,4 +57,13 @@ public class Product {
     public void setDescription(String description) {
         this.description = description;
     }
+
+	public int getStock() {
+		
+		return stock;
+	}
+	
+	public int setStock(int stock) {
+		return this.stock=stock;
+	}
 }
