@@ -22,12 +22,38 @@ public class Order {
         this.totalPrice = totalPrice;
     }
 
-    // Method to place an order
+    public Order(String string, int i, String string2, float f, ShoppingCart cart) {
+		// TODO Auto-generated constructor stub
+	}
+
+	// Method to place an order
     public void placeOrder() {
         this.status = "Placed";
         this.orderDate = new Date(); 
     }
+    
+    public boolean cancelOrder() {
+        if (this.status.equals("Placed")) {
+            this.status = "Order cancelled";
+            return true;
+        }
+        return false;
+    }
 
+    public void shipOrder() {
+        if (this.status.equals("Placed")) {
+            this.status = "Order shipped";
+       
+        }
+    }
+
+    public void deliverOrder() {
+        if (this.status.equals("Placed")) {
+            this.status = "Order delivered";
+            this.deliveryDate = new Date();
+            
+        }
+    }
     // Method to calculate the total price of the order
     //Constraint 36: TotalPriceCalculation
     public void calculateTotalPrice(float price, int quantity) {
@@ -95,6 +121,30 @@ public class Order {
     public void setTotalPrice(float totalPrice) {
         this.totalPrice = totalPrice;
     }
+    
+    public static void main(String[] args) {
+        ShoppingCart cart = new ShoppingCart(null); // Assuming a ShoppingCart class exists
+        Order order = new Order("ORD123", 1, "PRD456", 99.99f, cart);
 
+        // Place the order
+        order.placeOrder();
+        System.out.println("Order Status: " + order.getStatus());
+
+        // Try to cancel the order
+        if (order.cancelOrder()) {
+            System.out.println("Order was cancelled.");
+        } else {
+            System.out.println("Order could not be cancelled.");
+        }
+
+        
+        // Ship the order
+        order.shipOrder();
+        System.out.println("Order Status: " + order.getStatus());
+
+        // Deliver the order
+        order.deliverOrder();
+        System.out.println("Order Status: " + order.getStatus());
+    }
 }
 
